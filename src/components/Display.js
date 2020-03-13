@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Content from "./Content";
+import History from "./History";
 
 export default class Display extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ export default class Display extends Component {
       error: "",
       API_KEY: "edd9fad4",
       content: false,
-      input: true
+      input: true,
+      history: [],
+      historyValue: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,6 +26,14 @@ export default class Display extends Component {
     });
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("history")) {
+      this.setState({
+        history: JSON.parse(localStorage.getItem("history")),
+        historyValue: true
+      });
+    }
+  }
   onSubmit = async () => {
     if (this.state.movie !== "" && this.state.year !== "") {
       axios
@@ -36,6 +47,27 @@ export default class Display extends Component {
             input: false,
             error: ""
           });
+          var historyOfAll;
+          var history;
+          if (this.state.data.Response === "True") {
+            if (localStorage.getItem("history")) {
+              historyOfAll = JSON.parse(localStorage.getItem("history"));
+              history = {
+                movie: this.state.data.Title,
+                year: this.state.data.Year
+              };
+              historyOfAll.push(history);
+              localStorage.setItem("history", JSON.stringify(historyOfAll));
+            } else {
+              historyOfAll = [];
+              history = {
+                movie: this.state.data.Title,
+                year: this.state.data.Year
+              };
+              historyOfAll.push(history);
+              localStorage.setItem("history", JSON.stringify(historyOfAll));
+            }
+          }
         })
         .catch(err => {
           if (err) throw err;
@@ -112,6 +144,7 @@ export default class Display extends Component {
             <div className=""></div>
           </div>
         )}
+        {this.state.input && <History data={this.state.historyValue} history={this.state.history} />}
         {this.state.content && <Content data={this.state.data} />}
       </div>
     );
