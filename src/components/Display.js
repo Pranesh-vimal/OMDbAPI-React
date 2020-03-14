@@ -106,6 +106,7 @@ export default class Display extends Component {
                   name="movie"
                   value={this.state.movie}
                   onChange={this.onChange}
+                  autoComplete="off"
                 />
               </div>
               <div className="flex">
@@ -122,6 +123,7 @@ export default class Display extends Component {
                   name="year"
                   value={this.state.year}
                   onChange={this.onChange}
+                  autoComplete="off"
                 />
               </div>
               <div>
