@@ -11,7 +11,7 @@ export default class Display extends Component {
       year: "",
       data: [],
       error: "",
-      API_KEY: process.env.API_KEY,
+      API_KEY: "edd9fad4",
       content: false,
       input: true,
       history: [],
