@@ -58,7 +58,7 @@ export default class Content extends Component {
             <div></div>
             <div className="text-white text-center p-2 " data-aos="zoom-in">
               <div className="p-2 rounded-md" id="bg1">
-                No Data Found
+                No Data Found. Enter Correct Movie Title And Year!
               </div>
               <div className="flex">
                 <a
