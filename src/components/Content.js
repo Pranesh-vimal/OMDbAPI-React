@@ -44,7 +44,6 @@ export default class Content extends Component {
 
               <div className="flex">
                 <a
-                  data-aos="zoom-in"
                   href="/"
                   className="text-center flex-1 text-white bg-red-500 p-2 rounded-md w-full hover:bg-red-600"
                 >
@@ -63,7 +62,6 @@ export default class Content extends Component {
               </div>
               <div className="flex">
                 <a
-                  data-aos="zoom-in"
                   href="/"
                   className="text-center flex-1 text-white bg-red-500 mt-2 p-2 rounded-md w-full hover:bg-red-600"
                 >
