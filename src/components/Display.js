@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import Content from "./Content";
 import History from "./History";
+import Input from "./Input";
+import loading from "./loading.gif";
 
 export default class Display extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ export default class Display extends Component {
       content: false,
       input: true,
       history: [],
-      historyValue: false
+      historyValue: false,
+      loading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -36,6 +39,9 @@ export default class Display extends Component {
   }
   onSubmit = async () => {
     if (this.state.movie !== "" && this.state.year !== "") {
+      this.setState({
+        loading: true
+      });
       axios
         .get(
           `https://www.omdbapi.com/?apikey=${this.state.API_KEY}&t=${this.state.movie}&y=${this.state.year}`
@@ -45,7 +51,8 @@ export default class Display extends Component {
             data: res.data,
             content: true,
             input: false,
-            error: ""
+            error: "",
+            loading: false
           });
           var historyOfAll;
           var history;
@@ -54,7 +61,9 @@ export default class Display extends Component {
               historyOfAll = JSON.parse(localStorage.getItem("history"));
               history = {
                 movie: this.state.data.Title,
-                year: this.state.data.Year
+                year: this.state.data.Year,
+                id: Date.now(),
+                url: this.state.data.Poster
               };
               historyOfAll.push(history);
               localStorage.setItem("history", JSON.stringify(historyOfAll));
@@ -62,7 +71,9 @@ export default class Display extends Component {
               historyOfAll = [];
               history = {
                 movie: this.state.data.Title,
-                year: this.state.data.Year
+                year: this.state.data.Year,
+                id: Date.now(),
+                url: this.state.data.Poster
               };
               historyOfAll.push(history);
               localStorage.setItem("history", JSON.stringify(historyOfAll));
@@ -81,72 +92,27 @@ export default class Display extends Component {
 
   render() {
     return (
-      <div className="p-2">
+      <div className="p-2 mt-5">
         {this.state.input && (
-          <div className="grid grid-cols-1 md:grid-cols-3 p-2 md:mt-10 mt-3">
-            <div className=""></div>
-            <div className="p-2">
-              <div
-                id="bg1"
-                className="w-full p-2 rounded-md text-center text-white font-hairline"
-              >
-                Search Your Movie
-              </div>
-              <div className="flex">
-                <label
-                  id="bg2"
-                  className="p-2 mt-2 flex-auto text-center rounded-md mr-1 text-white font-extrabold"
-                >
-                  Movie Title :{" "}
-                </label>
-                <input
-                  className="p-2 mt-2 flex-auto rounded-md border focus:outline-none ml-1"
-                  placeholder="Enter Movie Name"
-                  type="text"
-                  name="movie"
-                  value={this.state.movie}
-                  onChange={this.onChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="flex">
-                <label
-                  id="bg2"
-                  className="p-2 mt-2 flex-auto text-center rounded-md mr-1 text-white font-extrabold"
-                >
-                  Movie Year :{" "}
-                </label>
-                <input
-                  className="p-2 mt-2 flex-auto rounded-md border focus:outline-none ml-1"
-                  placeholder="Enter Movie Year"
-                  type="text"
-                  name="year"
-                  value={this.state.year}
-                  onChange={this.onChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div>
-                <button
-                  onClick={this.onSubmit}
-                  className="mt-2 rounded-md w-full bg-red-400 p-2 text-white font-extrabold hover:bg-red-500 focus:outline-none"
-                >
-                  Submit
-                </button>
-                {this.state.error && (
-                  <h1
-                    id="bg1"
-                    className="p-2 text-center text-white mt-2 rounded-md font-extrabold"
-                  >
-                    {this.state.error}
-                  </h1>
-                )}
-              </div>
-            </div>
-            <div className=""></div>
+          <Input
+            movie={this.state.movie}
+            onChange={this.onChange}
+            year={this.state.year}
+            onSubmit={this.onSubmit}
+            error={this.state.error}
+          />
+        )}
+        {this.state.loading && (
+          <div className="flex justify-center">
+            <img src={loading} className="p-2 h-20 w-20" alt="loading" />
           </div>
         )}
-        {this.state.input && <History data={this.state.historyValue} history={this.state.history} />}
+        {this.state.input && (
+          <History
+            data={this.state.historyValue}
+            history={this.state.history}
+          />
+        )}
         {this.state.content && <Content data={this.state.data} />}
       </div>
     );

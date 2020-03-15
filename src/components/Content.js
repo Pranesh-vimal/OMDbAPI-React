@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default class Content extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-  }
-  componentDidMount() {
-    AOS.init({
-      duration: 3000
-    });
   }
   render() {
     return (
@@ -21,7 +14,7 @@ export default class Content extends Component {
             <div className="flex justify-center p-2">
               <img
                 data-aos="fade-right"
-                className="rounded-md object-cover "
+                className="rounded-md "
                 src={this.props.data.Poster}
                 alt={this.props.data.Title}
               />
@@ -43,7 +36,7 @@ export default class Content extends Component {
                 </label>
               </div>
               <div id="bg2" className="p-2 rounded-md my-2 flex">
-                <label className="p-3 rounded-md text-white">
+                <label className="p-3 rounded-md text-white capitalize">
                   <span className="text-white">Type : </span>
                   {this.props.data.Type}
                 </label>
@@ -51,9 +44,9 @@ export default class Content extends Component {
 
               <div className="flex">
                 <a
-                  data-aos="flip-left"
+                  data-aos="zoom-in"
                   href="/"
-                  className="text-center flex-1 text-white bg-red-500 p-2 rounded-md w-full hover:bg-red-600 md:block hidden"
+                  className="text-center flex-1 text-white bg-red-500 p-2 rounded-md w-full hover:bg-red-600"
                 >
                   Back
                 </a>
@@ -70,9 +63,9 @@ export default class Content extends Component {
               </div>
               <div className="flex">
                 <a
-                  data-aos="flip-left"
+                  data-aos="zoom-in"
                   href="/"
-                  className="text-center flex-1 text-white bg-red-500 mt-2 p-2 rounded-md w-full hover:bg-red-600 md:block hidden"
+                  className="text-center flex-1 text-white bg-red-500 mt-2 p-2 rounded-md w-full hover:bg-red-600"
                 >
                   Go Back
                 </a>

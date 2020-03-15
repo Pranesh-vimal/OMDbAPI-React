@@ -31,9 +31,24 @@
       href="https://fonts.googleapis.com/css?family=Sen&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/90c41f30c4.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
       body {
-        font-family: "Sen", sans-serif;
+        font-family: "Sen", comic san ms;
+      }
+      .tooltip .tooltip-text {
+        font-family: "Sen", comic san ms;
+        visibility: hidden;
+        text-align: center;
+        padding: 5px;
+        position: absolute;
+        z-index: 100;
+      }
+      .tooltip:hover .tooltip-text {
+        visibility: visible;
       }
     </style>
   </head>
