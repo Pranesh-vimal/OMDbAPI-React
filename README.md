@@ -1,3 +1,3 @@
 ## OMDbAPI using React
 
-Visit : hardcore-cray-e7f5e5.netlify.com
+[Visit : https://hardcore-cray-e7f5e5.netlify.com](https://hardcore-cray-e7f5e5.netlify.com/)
