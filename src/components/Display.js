@@ -13,7 +13,6 @@ export default class Display extends Component {
       year: "",
       data: [],
       error: "",
-      API_KEY: "edd9fad4",
       content: false,
       input: true,
       history: [],
@@ -44,7 +43,7 @@ export default class Display extends Component {
       });
       axios
         .get(
-          `https://www.omdbapi.com/?apikey=${this.state.API_KEY}&t=${this.state.movie}&y=${this.state.year}`
+          `https://www.omdbapi.com/?apikey=edd9fad4&t=${this.state.movie}&y=${this.state.year}`
         )
         .then(async res => {
           this.setState({

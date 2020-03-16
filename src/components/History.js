@@ -13,8 +13,8 @@ export default class History extends Component {
               className="w-full p-2 rounded-md text-center text-white font-hairline"
             >
               Recent Searches{" "}
-              <i class="fas fa-info-circle justify-end tooltip">
-                <span id="bg" class="tooltip-text mt-1 ml-2 p-3 rounded">
+              <i className="fas fa-info-circle justify-end tooltip">
+                <span id="bg" className="tooltip-text mt-1 ml-2 p-3 rounded">
                   Only Successfull <br /> Searches Will Be Displayed
                 </span>
               </i>
